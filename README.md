@@ -1,0 +1,2 @@
+# caninsure
+Test of Django
