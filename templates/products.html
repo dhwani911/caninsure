@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Products {% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row mt-4">
+        <!--filter-->
+        <div class="col-lg-3 mx-auto">
+            <div class="list-group">
+                <a href="/products/" class="list-group-item list-group-item-action" aria-current="true">
+                    All Products
+                </a>
+
+                {% for service in services %}
+                <a href="service/{{ service.id }}" class=" list-group-item list-group-item-action" aria-current="true">{{ service.service_name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!--All Products -->
+        <div id="products" class="col-lg-9 mx-auto">
+            <div class="row mx-auto mp-2">
+                {% for product in products %}
+                <div class="card mx-auto mb-3" style="width: 18rem;">
+                    <img src="/{{product.image}}" width="150" height="220" class="card-img-top" alt="image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.prod_name}}</h5>
+                        <p class="card-text">{{product.issue_date}}</p>
+                        <p class="card-text">{{product.prod_id}}</p>
+                        <p class="card-text"><b>{{product.included_services}} </b></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
