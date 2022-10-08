@@ -1,3 +1,9 @@
+"""GIT REPOSITORY LINK
+     https://github.com/dhwani911/caninsure/pull/new/master
+
+     webpage = Dolley911.pythonanywhere.com
+"""
+
 from django.shortcuts import render,redirect,HttpResponse
 from app_insure.models import Products,Services,Client
 from django.contrib import messages
@@ -12,6 +18,8 @@ def home(request):
 # AUTHENTICATION APIs
 def handleSignup(request):
     """Signup page"""
+    print(request.method)
+    print(request)
     if request.method == "POST":
         # Get the Post Parameters
         username = request.POST['name']
@@ -24,7 +32,8 @@ def handleSignup(request):
         # Validation for user creation
         # check for length of username characters
         if len(phone) < 10:                             # The phone is not less than 10 digits long.
-            messages.error(request, "Your user name must be under 10 characters")
+            print(len(phone))
+            messages.error(request, "Your phone number must be under 10 characters")
             return redirect("/")
         if len(password) >= 8:
             if not password.isalnum():                  # The password is not less than 8 characters with at least 1 digit.
@@ -74,3 +83,8 @@ def handleLogout(request):
     messages.success(request, "Successfully Logged out")
     return redirect('/')
 
+def productList(request):
+    products = Products.objects.all()
+    services = Services.objects.all()
+    context = {'products':products,'services':services}
+    return render(request,'app_insure/products.html',context)

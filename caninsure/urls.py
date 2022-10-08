@@ -23,4 +23,6 @@ urlpatterns = [
     path('signup/',views.handleSignup,name="signup"),
     path('login/',views.handleLogin,name="handleLogin"),
     path('logout/',views.handleLogout,name="handleLogout"),
+    path('products/', views.productList, name='productList'),
+
 ]

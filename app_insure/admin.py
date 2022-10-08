@@ -8,7 +8,7 @@ class ProductsAdmin(admin.ModelAdmin):
 
 @admin.register(Services)
 class ServicesAdmin(admin.ModelAdmin):
-    list_display = ("service_no","service_name","price")
+    list_display = ("service_no","service_name","price","prod_services")
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):

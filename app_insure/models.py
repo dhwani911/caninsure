@@ -21,9 +21,13 @@ class Products(models.Model):
 
 class Services(models.Model):
     """Services offered which is maintained from service panel"""
-    service_no = models.ForeignKey(Products,max_length=100,default=True,on_delete=models.CASCADE)
+    product_all = Products.objects.all()
+    allprod_choices = [(x.prod_name,x.prod_name) for x in product_all]
+
+    service_no = models.CharField(max_length=100)
     service_name = models.CharField(max_length=150)
     price = models.CharField(max_length=150)
+    prod_services = models.CharField(max_length=100, choices=allprod_choices, default=None)
 
     # Creating customized service no based on product_id
     @property
@@ -35,12 +39,12 @@ class Services(models.Model):
     def __str__(self):
         return self.service_name
 
+    # Checks for number of services to be added
     def validation_services(self):
         products = Products.objects.all()
         for i in products:
             if self.service_no[-1] > i.included_services:
                 break
-
 
 class Client(models.Model):
     """User register list"""
