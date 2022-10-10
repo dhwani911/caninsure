@@ -21,9 +21,11 @@ class Products(models.Model):
 
 class Services(models.Model):
     """Services offered which is maintained from service panel"""
-    product_all = Products.objects.all()
-    allprod_choices = [(x.prod_name,x.prod_name) for x in product_all]
-
+    try:
+        product_all = Products.objects.all()
+        allprod_choices = [(x.prod_name,x.prod_name) for x in product_all]
+    except Exception:
+        allprod_choices = [("","")]
     service_no = models.CharField(max_length=100)
     service_name = models.CharField(max_length=150)
     price = models.CharField(max_length=150)
