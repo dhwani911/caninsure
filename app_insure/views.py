@@ -1,7 +1,7 @@
 """GIT REPOSITORY LINK
      https://github.com/dhwani911/caninsure/pull/new/master
 
-     webpage = Dolley911.pythonanywhere.com
+     webpage = caninsure.pythonanywhere.com
 """
 
 from django.shortcuts import render,redirect,HttpResponse
@@ -18,11 +18,10 @@ def home(request):
 # AUTHENTICATION APIs
 def handleSignup(request):
     """Signup page"""
-    print(request.method)
-    print(request)
+
     if request.method == "POST":
         # Get the Post Parameters
-        username = request.POST['name']
+        fullname = request.POST['name']
         dob = request.POST['dob']
         address = request.POST['address']
         phone = request.POST['phone']
@@ -39,16 +38,9 @@ def handleSignup(request):
             if not password.isalnum():                  # The password is not less than 8 characters with at least 1 digit.
                 messages.error(request, "Username characters must be letters and alpha")
                 return redirect("/")
-        if not email.is_valid:                          # Checks for email is valid
-            messages.error(request, "Email is not valid")
-            return redirect("/")
 
-        # Create the user
-        myuser = User.objects.create_user(username, email, password)
-        myuser.username = username
-        myuser.email = email
-        myuser.password = password
-        myuser.save()
+        # Create the user with username is "email" to login
+        myuser = User.objects.create_user(email, email,password,fullname,dob,address)
         messages.success(request, "Your user has been created successfully")
         return redirect('home')
     else:

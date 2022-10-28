@@ -23,30 +23,37 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
             </ul>
-<!--            <div class="ml-auto form-inline ">-->
-<!--                {% if user.is_authenticated %}-->
-<!--                <ul class="navbar-nav mr-2">-->
-<!--                    <li class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button"-->
-<!--                            data-toggle="dropdown"> Welcome {{request.user}}</a>-->
-<!--                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                            <a class="dropdown-item" href="/logout/">Logout</a>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--            </div>-->
+
+            <!--LOGOUT BUTTON -->
+            <div class="ml-auto form-inline ">
+                {% if user.is_authenticated %}
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Welcome {{request.user}}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark mx-auto" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="/logout/" style="min-width: 15rem">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             {% else %}
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#signupModal">
                 SignUp
             </button>
 
-            <button type="button" class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <button type="button" class="btn btn-primary mx-auto float-right" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Login
             </button>
             {% endif %}
         </div>
     </nav>
+    <!-- ALERT MESSAGES DISPLAY -->
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
         <strong>Message : </strong> {{ message }}
@@ -54,8 +61,8 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-
     {% endfor %}
+
     <!-- Signup Modal -->
     <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -68,7 +75,7 @@
             <form action="/signup/" method='POST'>
                         {% csrf_token %}
                 <div class="form-group my-2">
-                    <label for="name">Username</label>
+                    <label for="name">Fullname</label>
                     <input type="text" class="form-control" id="name" name="name"
                         placeholder="Enter Fullname" required>
                 </div>
